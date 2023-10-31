@@ -2,19 +2,29 @@ import re
 
 with open("names.txt") as x:
     data = x.readlines()
+    # print(data)
+    # for line in data:
+    #     print(line)
 
         
-pattern_name_twitter = re.compile(r'([\w\s-]+), ([\w\s-]+)\s+([\w+@]+\w+)\s+.*\s+@([\w]+)$')
+# pattern_name_twitter = re.compile(r'([\w\s-]+), ([\w\s-]+)\s+([\w+@]+\w+)\s+.*\s+@([\w]+)$')
 
+pattern_name_twitter = re.compile("(^[A-Z][a-z]+), ([\w -]*)([A-Z][a-z]+).*\s(@[\w]+$)")
 
-for line in data:
-    match = pattern_name_twitter.search(line)
+for person in data:
+    match = pattern_name_twitter.search(person)
+
     if match:
-        first_name = match.group(2)
-        last_name = match.group(1)
-        twitter_handle = "@" + match.group(4)
-        full_name = f"{first_name} {last_name}" 
-        print(f"{full_name} / {twitter_handle}")
+        print("\n", f"{match.group(3)} {match.group(2)}{match.group(1)} / {match.group(4)}")
+
+# for line in data:
+#     match = pattern_name_twitter.search(line)
+#     if match:
+#         first_name = match.group(2)
+#         last_name = match.group(1)
+#         twitter_handle = "@" + match.group(4)
+#         full_name = f"{first_name} {last_name}" 
+#         print(f"{full_name} / {twitter_handle}")
 
 
 
